@@ -46,28 +46,27 @@ if %errorlevel% equ 0 (
     echo.
     echo 🎯 AVAILABLE FEATURES:
     echo.
+    echo 🏠 Main Application:
+    echo   python src/main.py
+    echo.
     echo 📹 Real-time Face Emotion Detection:
-    echo   python realtime_emotion.py
+    echo   python src/vision/crowd_detector.py
     echo.
     echo 🎤 Real-time Speech Emotion Recognition:
-    echo   cd "Speech Emotion Recognition System"
-    echo   python realtime_speech_emotion.py
+    echo   python src/audio/realtime_speech_emotion.py
     echo.
     echo 🗣️  Advanced Speech Emotion Detector:
-    echo   cd "Speech Emotion Recognition System"
-    echo   python speech_emotion_detector.py
+    echo   python src/audio/speech_emotion_detector.py
     echo.
     echo 👥 Crowd Detection ^& Emotion Analysis:
-    echo   cd "crowd and emotion Vision system"
-    echo   python yolo_crowd.py
+    echo   python src/vision/crowd_detector.py
     echo.
     echo 🔧 Environment Activation:
     echo   env\Scripts\activate.bat
     echo   deactivate (to exit)
     echo.
     echo 📋 Test Speech Model:
-    echo   cd "Speech Emotion Recognition System"
-    echo   python test_model.py
+    echo   python src/audio/test_model.py
     echo.
     echo Press any key to exit...
     pause >nul

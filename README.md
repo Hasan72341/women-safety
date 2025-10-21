@@ -5,23 +5,26 @@ This repository contains multiple AI-powered systems designed to enhance women's
 ## Systems Included
 
 ### 1. Real-time Emotion Detection
-- **File**: `realtime_emotion.py`
-- **Model**: `emotion_model.h5`
-- **Labels**: `emotion_labels.joblib`
-- **Description**: Detects facial emotions in real-time using computer vision
+- **File**: `src/vision/crowd_detector.py`
+- **Models**: `models/yolov8n.pt`, `models/yolov8n-pose.pt`
+- **Description**: Detects crowds and human poses using YOLOv8
 
 ### Speech Emotion Recognition
-- **Main Script**: `Speech Emotion Recognition System/speech_emotion_detector.py`
-- **Real-time Script**: `Speech Emotion Recognition System/realtime_speech_emotion.py`
-- **Test Script**: `Speech Emotion Recognition System/test_model.py`
+- **Main Script**: `src/audio/speech_emotion_detector.py`
+- **Real-time Script**: `src/audio/realtime_speech_emotion.py`
+- **Simple Real-time**: `src/audio/simple_automatic_speech_emotion.py`
+- **Test Script**: `src/audio/test_model.py`
 - **Model**: `firdhokk/speech-emotion-recognition-with-openai-whisper-large-v3` (Hugging Face)
 - **Description**: Advanced speech emotion recognition using OpenAI Whisper Large V3 model
 - **Emotions**: Happy, Sad, Angry, Neutral, Disgust, Fearful, Surprised
 
-### 3. Crowd Detection
-- **File**: `yolo_crowd.py`
-- **Models**: `yolov8n.pt`, `yolov8n-pose.pt`
-- **Description**: Detects crowds and human poses using YOLOv8
+### 3. Decision Engine (Coming Soon)
+- **File**: `src/core/decision_engine.py`
+- **Description**: Central decision engine for coordinating all safety systems
+
+### 4. Emergency Response (Coming Soon)
+- **File**: `src/emergency/emergency_system.py`
+- **Description**: Emergency response system for handling critical situations
 
 ## Installation
 
@@ -56,23 +59,63 @@ Run the appropriate setup script for your operating system:
 
 ## Usage
 
-### Real-time Emotion Detection
+### Python Backend
+
+#### Activate Environment First
+- **macOS/Linux**: `source env/bin/activate`
+- **Windows**: `env\Scripts\activate.bat`
+
+#### Run Applications
+1. **Main Application**:
+   ```bash
+   python src/main.py
+   ```
+
+2. **Real-time Face Emotion Detection**:
+   ```bash
+   python src/vision/crowd_detector.py
+   ```
+
+3. **Real-time Speech Emotion Recognition** (Quick Start):
+   ```bash
+   python src/audio/realtime_speech_emotion.py
+   ```
+
+4. **Simple Automatic Speech Emotion Recognition**:
+   ```bash
+   python src/audio/simple_automatic_speech_emotion.py
+   ```
+
+5. **Advanced Speech Emotion Detector** (Full Features):
+   ```bash
+   python src/audio/speech_emotion_detector.py
+   ```
+
+6. **Test Speech Model**:
+   ```bash
+   python src/audio/test_model.py
+   ```
+
+### React Frontend
+
+#### Install Dependencies
 ```bash
-python realtime_emotion.py
+cd frontend
+npm install
 ```
 
-### Speech Emotion Recognition
-
-#### Quick Start (NEW - Fully Automatic!)
+#### Start Development Server
 ```bash
-# Navigate to the speech emotion recognition directory:
-cd "Speech Emotion Recognition System"
+cd frontend
+npm run dev
+```
 
-# Simple automatic real-time detection (just run and speak!):
-python simple_automatic_speech_emotion.py
+The frontend will be available at http://localhost:5173 with Hot Module Replacement (HMR) enabled for instant updates during development.
 
-# Advanced automatic version with customizable parameters:
-python realtime_speech_emotion.py --chunk-duration 3 --overlap 1 --threshold 0.3
+#### Build for Production
+```bash
+cd frontend
+npm run build
 ```
 
 #### Advanced Usage
@@ -106,30 +149,49 @@ python yolo_crowd.py
 
 ```
 women-safety/
-├── emotion_model.h5              # Facial emotion detection model
-├── emotion_labels.joblib         # Labels for emotion detection
-├── realtime_emotion.py           # Real-time emotion detection script
-├── yolo_crowd.py                 # Crowd detection using YOLO
-├── yolov8n.pt                    # YOLO object detection model
-├── yolov8n-pose.pt               # YOLO pose estimation model
+├── models/                       # Pre-trained models
+│   ├── yolov8n.pt                # YOLO object detection model
+│   └── yolov8n-pose.pt           # YOLO pose estimation model
+├── src/                          # Python source code
+│   ├── main.py                   # Main application entry point
+│   ├── core/                     # Core decision engine
+│   │   └── decision_engine.py    # Central decision system
+│   ├── vision/                   # Vision processing modules
+│   │   └── crowd_detector.py     # Crowd and pose detection
+│   ├── audio/                    # Audio processing modules
+│   │   ├── speech_emotion_detector.py    # Main speech emotion detector
+│   │   ├── realtime_speech_emotion.py    # Real-time speech emotion recognition
+│   │   ├── simple_automatic_speech_emotion.py # Simple automatic mode
+│   │   └── test_model.py         # Model testing script
+│   ├── emergency/                # Emergency response system
+│   │   └── emergency_system.py   # Emergency calling and messaging
+│   └── utils/                    # Utility functions
+│       └── helpers.py            # Helper functions
+├── frontend/                     # React frontend application
+│   ├── src/                      # Frontend source code
+│   │   ├── pages/                # Page components (Dashboard, Emergency, Settings)
+│   │   ├── services/             # API services
+│   │   ├── hooks/                # Custom hooks
+│   │   ├── App.jsx               # Main app component
+│   │   └── main.jsx              # Entry point
+│   ├── public/                   # Static assets
+│   ├── package.json              # Frontend dependencies
+│   └── README.md                 # Frontend documentation
+├── assets/                       # Documentation and assets
+│   └── audio_readme.md           # Audio system documentation
 ├── requirements.txt              # Python dependencies
 ├── env/                          # Virtual environment
-│
-├── Speech Emotion Recognition System/
-│   ├── speech_emotion_detector.py    # Main speech emotion detector
-│   ├── realtime_speech_emotion.py    # Real-time speech emotion recognition
-│   ├── test_model.py                 # Model testing script
-│   └── 1.py                          # Legacy file (empty)
-│
 └── snapshots/                    # Image snapshots
 ```
 
 ## Features
 
-### Real-time Emotion Detection
-- Detects 7 facial emotions: angry, disgust, fear, happy, neutral, sad, surprise
-- Uses OpenCV for webcam capture
-- Real-time processing with FPS counter
+### Real-time Emotion Detection (Crowd & Pose Analysis)
+- Detects people in images and video
+- Estimates crowd size
+- Pose estimation for human body analysis
+- Uses state-of-the-art YOLOv8 models
+- Real-time processing with safety dashboard
 
 ### Speech Emotion Recognition
 - **NEW**: Uses Hugging Face Whisper Large V3 model (`firdhokk/speech-emotion-recognition-with-openai-whisper-large-v3`)
@@ -138,13 +200,21 @@ women-safety/
 - Audio file analysis support
 - High accuracy (91.99% on test dataset)
 - Confidence scores and probability distributions
+- Fully automatic continuous monitoring
 - No simulation mode - fully functional with pre-trained model
 
-### Crowd Detection
-- Detects people in images and video
-- Estimates crowd size
-- Pose estimation for human body analysis
-- Uses state-of-the-art YOLOv8 models
+### Decision Engine (Coming Soon)
+- Central decision engine for coordinating all safety systems
+- Multi-modal threat assessment combining vision and audio inputs
+- Risk scoring algorithm based on environmental factors
+- Adaptive sensitivity based on context
+
+### Emergency Response (Coming Soon)
+- Automatic 112 calling with location data
+- Contact notification cascade (SMS → Call → Email)
+- Real-time GPS location sharing
+- Evidence collection (photos, audio, timestamps)
+- Multi-channel alert system
 
 ## Requirements
 

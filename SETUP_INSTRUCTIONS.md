@@ -66,9 +66,15 @@ python3.12 -m venv env
 pip install --upgrade pip
 ```
 
-### 5. Install Dependencies
+### 5. Install Python Dependencies
 ```bash
 pip install -r requirements.txt
+```
+
+### 6. Install Frontend Dependencies
+```bash
+cd frontend
+npm install
 ```
 
 ## Verifying Installation
@@ -93,26 +99,52 @@ python test_model.py
 - **Windows**: `env\Scripts\activate.bat`
 
 ### Run Applications
-1. **Real-time Face Emotion Detection**:
+
+#### Python Backend
+1. **Main Application**:
    ```bash
-   python realtime_emotion.py
+   python src/main.py
    ```
 
-2. **Real-time Speech Emotion Recognition** (Quick Start):
+2. **Real-time Face Emotion Detection**:
    ```bash
-   cd "Speech Emotion Recognition System"
-   python realtime_speech_emotion.py
+   python src/vision/crowd_detector.py
    ```
 
-3. **Advanced Speech Emotion Detector** (Full Features):
+3. **Real-time Speech Emotion Recognition** (Quick Start):
    ```bash
-   cd "Speech Emotion Recognition System"
-   python speech_emotion_detector.py
+   python src/audio/realtime_speech_emotion.py
    ```
 
-4. **Crowd Detection**:
+4. **Simple Automatic Speech Emotion Recognition**:
    ```bash
-   python yolo_crowd.py
+   python src/audio/simple_automatic_speech_emotion.py
+   ```
+
+5. **Advanced Speech Emotion Detector** (Full Features):
+   ```bash
+   python src/audio/speech_emotion_detector.py
+   ```
+
+6. **Test Speech Model**:
+   ```bash
+   python src/audio/test_model.py
+   ```
+
+#### React Frontend
+1. **Start Development Server**:
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+   
+   The development server will start with Hot Module Replacement (HMR) enabled at http://localhost:5173.
+   Changes to React components will update instantly without full page reloads.
+
+2. **Build for Production**:
+   ```bash
+   cd frontend
+   npm run build
    ```
 
 ## Troubleshooting
@@ -136,7 +168,19 @@ python test_model.py
 5. **Speech Emotion Model Issues**:
    - Ensure internet connection for model download
    - Check Hugging Face model availability: `firdhokk/speech-emotion-recognition-with-openai-whisper-large-v3`
-   - Test model loading: `cd "Speech Emotion Recognition System" && python test_model.py`
+   - Test model loading: `cd src/audio && python test_model.py`
+
+6. **Frontend Issues**:
+   - Ensure Node.js is installed: `node --version`
+   - Clear npm cache: `npm cache clean --force`
+   - Reinstall dependencies: `cd frontend && rm -rf node_modules && npm install`
+   - Check for port conflicts: `lsof -i :5173`
+   
+7. **Hot Reload Issues**:
+   - Restart the development server: `npm run dev`
+   - Check browser console for HMR errors
+   - Ensure file watchers are not disabled
+   - Verify environment variables are correctly set
 
 4. **Audio device issues**:
    - Ensure microphone is connected and accessible
