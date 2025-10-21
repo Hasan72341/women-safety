@@ -348,9 +348,9 @@ def initiate_emergency_call():
 
 ## 📞 Emergency Service Integration
 
-### European Emergency Number (112)
-- Universal emergency number across EU
-- Available 24/7 in all member states
+### Indian Emergency Number (112)
+- Universal emergency number across India
+- Available 24/7 in all states
 - Free of charge from any phone
 - Multilingual operators
 - Automatic location detection
@@ -374,7 +374,6 @@ def initiate_emergency_call():
 ### Non-Functional Requirements
 - [ ] Battery life >8 hours continuous operation
 - [ ] Network resilience with offline capabilities
-- [ ] GDPR compliance for data handling
 - [ ] Accessibility features for all users
 - [ ] Cross-platform compatibility (iOS, Android, Web)
 
